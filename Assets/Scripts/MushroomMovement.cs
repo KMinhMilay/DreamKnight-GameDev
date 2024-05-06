@@ -3,7 +3,7 @@ using UnityEngine;
 public class MushroomMovement : MonoBehaviour
 {
     private int damageCount = 0; // Biến đếm số lần nhận sát thương
-    public int deathThreshold = 3; // Số lần nhận sát thương để kích hoạt animation death
+    public int deathThreshold = 4; // Số lần nhận sát thương để kích hoạt animation death
 
     public float moveSpeed = 10f;
     public float runDistance = 2f; // Khoảng cách di chuyển khi đang chạy
