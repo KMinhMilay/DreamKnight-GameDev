@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GoblinAnimatorController : MonoBehaviour
+public class AnimatorController : MonoBehaviour
 {
     private Animator animator;
 

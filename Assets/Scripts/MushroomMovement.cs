@@ -1,15 +1,14 @@
 using UnityEngine;
-
 [RequireComponent(typeof(Rigidbody2D))]
-public class GoblinMovement : MonoBehaviour
+public class MushroomMovement : MonoBehaviour
 {
     private int damageCount = 0; // Biến đếm số lần nhận sát thương
-    public int deathThreshold = 2; // Số lần nhận sát thương để kích hoạt animation death
+    public int deathThreshold = 3; // Số lần nhận sát thương để kích hoạt animation death
 
     public float moveSpeed = 10f;
-    public float runDistance = 4f; // Khoảng cách di chuyển khi đang chạy
+    public float runDistance = 2f; // Khoảng cách di chuyển khi đang chạy
     public float idleTime = 1f; // Thời gian đứng yên giữa các lần chạy
-    public float runTime = 3f; // Thời gian chạy trước khi đứng yên
+    public float runTime = 2f; // Thời gian chạy trước khi đứng yên
 
     private bool takingHit = false;
     private float hitTimer = 0f; // Biến đếm thời gian sau khi nhận sát thương
@@ -95,7 +94,7 @@ public class GoblinMovement : MonoBehaviour
                     // Kích hoạt animation attack
                     animator.SetTrigger("Attack");
                     hitTimer = 0f;
-                }
+                }   
             }
 
             if (takingHit)
@@ -151,3 +150,4 @@ public class GoblinMovement : MonoBehaviour
         rb.MovePosition(Vector2.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime));
     }
 }
+
