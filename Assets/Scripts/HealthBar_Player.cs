@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NewBehaviourScript : MonoBehaviour
+public class HealthBar : MonoBehaviour
 {
     // Start is called before the first frame update
     public float health;
@@ -13,7 +13,6 @@ public class NewBehaviourScript : MonoBehaviour
     float lerpSpeed;
     void Start()
     {
-        
         health=maxHealth;
         
     }
@@ -21,14 +20,15 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (health < 0) health = 0;
         if(health>maxHealth) health = maxHealth;
         lerpSpeed = 3f * Time.deltaTime;
         HealthBarFiller();
     }
     void HealthBarFiller()
     {
-        healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount,health/maxHealth,lerpSpeed);
+        healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, health / maxHealth, lerpSpeed); ;
+
     }
     public void Damage(float damagePoints)
     {
