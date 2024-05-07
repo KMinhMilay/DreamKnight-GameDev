@@ -34,7 +34,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
         if(health > 0)
         {
-            Console.WriteLine("Đã nhận damage. Trừ máu");
+            print("Đã nhận damage. Trừ máu");
             health -= damagePoints;
         }
     }
@@ -42,7 +42,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
         if (health < maxHealth)
         {
-            Console.WriteLine("Đã phục hồi máu");
+            print("Đã phục hồi máu");
             health += healingPoints;
         }
     }
