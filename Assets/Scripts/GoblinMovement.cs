@@ -43,6 +43,8 @@ public class GoblinMovement : MonoBehaviour
         takingHit = true;
         animator.SetTrigger("TakeHit");
         damageCount++; // Tăng biến đếm sát thương
+        
+
     }
 
     void Update()
@@ -85,17 +87,20 @@ public class GoblinMovement : MonoBehaviour
                 }
                 // TakeDamage();
             }
-
+        
             // Xác định điều kiện để kích hoạt animation attack
             if (!takingHit && !isRunning)
             {
                 hitTimer += Time.deltaTime;
+                
                 if (hitTimer >= 1f)
                 {
                     // Kích hoạt animation attack
                     animator.SetTrigger("Attack");
                     hitTimer = 0f;
+                    
                 }
+                
             }
 
             if (takingHit)
