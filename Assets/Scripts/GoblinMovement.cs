@@ -25,7 +25,7 @@ public class GoblinMovement : MonoBehaviour
 
     private bool isDead = false; // Biến kiểm tra Goblin đã chết hay chưa
     private Vector2 deathPosition; // Vị trí để Goblin dừng sau khi chết
-
+    public LayerMask diamondLayer; // Layer chứa diamond
     void Start()
     {
         movingRight = !movingRight;

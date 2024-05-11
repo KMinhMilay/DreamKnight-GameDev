@@ -166,7 +166,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -201,6 +201,9 @@ MonoBehaviour:
   runTime: 3
   animator: {fileID: 1064258616181656906}
   spriteRenderer: {fileID: 8688558575647829203}
+  diamondLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1964687164188948574
 MonoBehaviour:
   m_ObjectHideFlags: 0

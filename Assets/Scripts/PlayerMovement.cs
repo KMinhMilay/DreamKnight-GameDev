@@ -17,12 +17,13 @@ public class PlayerMovement : MonoBehaviour
     // References
     Rigidbody2D rb;
     public Animator animator;
-    
+    private DiamondScore diamondScore;
     
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        diamondScore = GameObject.Find("DiamondScore").GetComponent<DiamondScore>();
     }
 
     void Update()
@@ -33,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Jump();
             }
-        if(Input.GetKeyDown(KeyCode.O))
+            if(Input.GetKeyDown(KeyCode.O))
             {
                 Roll();
             }
@@ -70,12 +71,20 @@ public class PlayerMovement : MonoBehaviour
       
     }
     private void OnTriggerEnter2D(Collider2D collision)
+{
+    Debug.Log("Collision detected with: " + collision.gameObject.name); // Thêm dòng này để kiểm tra xem collision có xảy ra không
+
+    if(collision.gameObject.tag == "Ground")
     {
-        if(collision.gameObject.tag == "Ground")
-        {
-            canJump=true;
-        }
+        canJump = true;
     }
+    else if(collision.gameObject.tag == "Diamond")
+    {
+        diamondScore.AddCoins(100); // Thêm điểm khi va chạm với diamond
+        Destroy(collision.gameObject); // Xóa diamond khỏi scene
+    }
+}
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Ground")
