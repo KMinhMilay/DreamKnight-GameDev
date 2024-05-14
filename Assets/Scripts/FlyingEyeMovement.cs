@@ -98,7 +98,7 @@ public class FlyingEyeMovement : MonoBehaviour
                     // Kích hoạt animation attack
                     animator.SetTrigger("Attack");
                     hitTimer = 0f;
-                    TakeDamage();
+                    // TakeDamage();
                 }
                 
             }

@@ -88,30 +88,30 @@ public class SkeletonMovement : MonoBehaviour
             }
         
             // Xác định điều kiện để kích hoạt animation attack
-            // if (!takingHit && !isWalk)
-            // {
-            //     hitTimer += Time.deltaTime;
-                
-            //     if (hitTimer >= 1f)
-            //     {
-            //         // Kích hoạt animation attack
-            //         animator.SetTrigger("Attack");
-            //         hitTimer = 0f;
-                    
-            //     }
-                
-            // }
             if (!takingHit && !isWalk)
             {
                 hitTimer += Time.deltaTime;
-                isShield=true;
+                
                 if (hitTimer >= 1f)
                 {
-                    animator.SetTrigger("Shield");
-                    isShield=false;
+                    // Kích hoạt animation attack
+                    animator.SetTrigger("Attack");
                     hitTimer = 0f;
+                    
                 }
+                
             }
+            // if (!takingHit && !isWalk)
+            // {
+            //     hitTimer += Time.deltaTime;
+            //     isShield=true;
+            //     if (hitTimer >= 1f)
+            //     {
+            //         animator.SetTrigger("Shield");
+            //         isShield=false;
+            //         hitTimer = 0f;
+            //     }
+            // }
             if (takingHit)
             {
                 // Tăng thời gian sau khi nhận sát thương
