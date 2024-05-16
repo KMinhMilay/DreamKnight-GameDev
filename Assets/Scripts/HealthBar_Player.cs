@@ -46,4 +46,12 @@ public class HealthBar : MonoBehaviour
             health += healingPoints;
         }
     }
+    public float getCurrentHealth()
+    {
+        return health;
+    }
+    public float getMaxHealth()
+    {
+        return maxHealth;
+    }
 }

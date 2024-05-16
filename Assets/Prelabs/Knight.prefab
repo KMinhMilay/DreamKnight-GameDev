@@ -13,10 +13,12 @@ GameObject:
   - component: {fileID: 5962670605819109834}
   - component: {fileID: 2913712062543130238}
   - component: {fileID: 6844825093729321612}
-  - component: {fileID: 1260072668068246949}
   - component: {fileID: 7533772404047402858}
-  - component: {fileID: 973097210050912521}
-  m_Layer: 0
+  - component: {fileID: 1347444107230296069}
+  - component: {fileID: 1260072668068246949}
+  - component: {fileID: 2023613126413985699}
+  - component: {fileID: 2158051004361437954}
+  m_Layer: 6
   m_Name: Knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +37,9 @@ Transform:
   m_LocalPosition: {x: -74.53, y: -6.34, z: 0.034137927}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 387642985735597594}
+  - {fileID: 5231102916794521701}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &50912604955480197
@@ -124,12 +128,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  canJump: 0
   moveDir: {x: 0, y: 0}
   lastHorizontalVector: 0
   lastVerticalVector: 0
   jumpForce: 10
+  rb: {fileID: 0}
   animator: {fileID: 0}
+  canJump: 0
 --- !u!114 &6844825093729321612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +147,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3c4d099bd5cdd48bc4d10a2bfffd9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7533772404047402858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022145667417931275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6c250bb6838ac479046406907a13f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5962670605819109834}
+  playerMovement: {fileID: 0}
+  swordslash: {fileID: 6716051146311912029, guid: a0dde0fb96890fc4b8d497b0059f6fe9, type: 3}
+  SwordSlashLauncher: {fileID: 5231102916794521701}
+  SwordSlashObject: {fileID: 6355693953328658740, guid: a0dde0fb96890fc4b8d497b0059f6fe9, type: 3}
+--- !u!114 &1347444107230296069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022145667417931275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d99c1c2c85a391446bda512f8aab9c2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KnockbackForceX: 0
+  KnockbackForceY: 0
+  KnockbackCounter: 0
+  KnockbackTotalTime: 0
+  KnockedFromRight: 0
+  flickerDuration: 0
+  ActiveAttackDamageReceive: 0
+  healthBar: {fileID: 0}
+  Health: {fileID: 0}
+  manaBar: {fileID: 0}
+  Mana: {fileID: 0}
+  playerMovement: {fileID: 2913712062543130238}
 --- !u!50 &1260072668068246949
 Rigidbody2D:
   serializedVersion: 4
@@ -169,22 +215,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7533772404047402858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1022145667417931275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e6c250bb6838ac479046406907a13f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 5962670605819109834}
-  playerMovement: {fileID: 0}
---- !u!61 &973097210050912521
-BoxCollider2D:
+--- !u!70 &2023613126413985699
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -212,19 +244,153 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.038795948, y: -0.054599285}
+  m_Size: {x: 0.57921124, y: 1.3908014}
+  m_Direction: 0
+--- !u!114 &2158051004361437954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022145667417931275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ff0ad2e224b694ab448bb51e23ff40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  castFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  _isGrounded: 0
+--- !u!1 &2824303627949728707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 387642985735597594}
+  - component: {fileID: 1248863595848975232}
+  m_Layer: 0
+  m_Name: AttackZone
+  m_TagString: PlayerAttack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &387642985735597594
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2824303627949728707}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7091642517695634922}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &1248863595848975232
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2824303627949728707}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.7455621}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.5}
-    newSize: {x: 1, y: 1.5}
-    adaptiveTilingThreshold: 0.5
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.4713583, y: 0.6420059}
+      - {x: -0.2529679, y: 0.79827523}
+      - {x: 0.28050613, y: 0.39070892}
+      - {x: 0.39530563, y: -0.050463438}
+      - {x: 0.17006874, y: -0.3660779}
+      - {x: -0.7906479, y: -0.58228767}
+      - {x: 0.4147545, y: -0.5405214}
+      - {x: 0.771204, y: -0.3460405}
+      - {x: 0.82575893, y: 0.20758551}
+  m_UseDelaunayMesh: 0
+--- !u!1 &5678504140139260610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5231102916794521701}
+  m_Layer: 6
+  m_Name: SwordSlashLauncher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5231102916794521701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5678504140139260610}
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.37764835}
-  m_EdgeRadius: 0
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.38, y: 0.17, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7091642517695634922}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
