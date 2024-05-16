@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Diamond
+  - PlayerSkillAttack
+  - PlayerAttack
+  - Spikes
+  - Enemy
+  - EnemyAttack
+  - HpPotion
   layers:
   - Default
   - TransparentFX

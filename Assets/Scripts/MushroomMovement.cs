@@ -36,12 +36,12 @@ public class MushroomMovement : MonoBehaviour
         // Khởi tạo vị trí mục tiêu ban đầu
         targetPosition = new Vector2(transform.position.x + (movingRight ? runDistance : -runDistance), transform.position.y);
     }
-
-    void TakeDamage()
+    
+    public void TakeDamage(int dmg)
     {
         takingHit = true;
         animator.SetTrigger("TakeHit");
-        damageCount++; // Tăng biến đếm sát thương
+        damageCount+= dmg; // Tăng biến đếm sát thương
     }
 
     void Update()
@@ -51,7 +51,11 @@ public class MushroomMovement : MonoBehaviour
             if (isRunning && !takingHit)
             {
                 MoveCharacter(targetPosition);
-                spriteRenderer.flipX = !movingRight;
+                if (!movingRight)
+                {
+                    transform.localScale = new Vector2(-1, 1);
+                }
+                else transform.localScale = new Vector2(1, 1);
                 // Kiểm tra nếu Goblin gần vị trí mục tiêu
                 if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
                 {
