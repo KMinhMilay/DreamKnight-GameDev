@@ -6,31 +6,22 @@ using UnityEngine.SceneManagement;
 public class LoadMap : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float delaySecond=2;
-    public string nameScene="Map 2";
     void Start()
     {
-        
-    }private void OnTriggerEnter(Collider collision) {
-        if(collision.gameObject.tag == "Untagged")
+
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
         {
-            collision.gameObject.SetActive(false);
-            ModeSelect();
+            Scene.instance.NextLevel();
+
         }
-    }
-    public void ModeSelect()
-    {
-        StartCoroutine(routine:LoadAfterDelay());
-    }
-    IEnumerator LoadAfterDelay()
-    {
-        yield return new WaitForSeconds(delaySecond);
-        SceneManager.LoadScene(nameScene);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
