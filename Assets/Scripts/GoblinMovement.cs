@@ -37,12 +37,18 @@ public class GoblinMovement : MonoBehaviour
         // Khởi tạo vị trí mục tiêu ban đầu
         targetPosition = new Vector2(transform.position.x + (movingRight ? runDistance : -runDistance), transform.position.y);
     }
-
-    void TakeDamage()
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "PlayerAttack")
+    //    {
+    //        TakeDamage();
+    //    }
+    //}
+    public void TakeDamage(int dmg)
     {
         takingHit = true;
         animator.SetTrigger("TakeHit");
-        damageCount++; // Tăng biến đếm sát thương
+        damageCount+= dmg; // Tăng biến đếm sát thương
     }
 
     void Update()
@@ -52,7 +58,12 @@ public class GoblinMovement : MonoBehaviour
             if (isRunning && !takingHit)
             {
                 MoveCharacter(targetPosition);
-                spriteRenderer.flipX = !movingRight;
+                //spriteRenderer.flipX = !movingRight;
+                if (!movingRight)
+                {
+                    transform.localScale = new Vector2(-1, 1);
+                }
+                else transform.localScale = new Vector2(1, 1);
                 // Kiểm tra nếu Goblin gần vị trí mục tiêu
                 if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
                 {

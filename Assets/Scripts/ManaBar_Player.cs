@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class ManaBar : MonoBehaviour
 {
     public float mana;
-    float maxMana =100;
+    public float maxMana =100;
     public Image manaBar;
     float lerpSpeed;
     // Start is called before the first frame update
@@ -27,15 +27,6 @@ public class ManaBar : MonoBehaviour
         lerpSpeed = 3f * Time.deltaTime;
         ManaBarFiller();
         ManaRecover();
-        //if (Input.GetKeyDown(KeyCode.K))
-        //{
-        //    print("Đã nhấn nút K");
-        //    if (mana > 0)
-        //    {
-        //        print("Đã tung Skill");
-        //        mana -= 20;
-        //    }
-        //}
     }
     
     void ManaBarFiller()
@@ -53,7 +44,7 @@ public class ManaBar : MonoBehaviour
         }
         
     }
-    void GetMana(float manaPoint)
+    public void GetMana(float manaPoint)
     {
         if (mana > 0)
         {
@@ -62,5 +53,17 @@ public class ManaBar : MonoBehaviour
             print("Đã trừ mana");
         }
     }
-
+    public float getCurrentMana()
+    {
+        return mana;
+    }
+    public float getMaxMana()
+    {
+        return maxMana;
+    }
+    public void ResetMana()
+    {
+        mana = maxMana;
+        ManaBarFiller(); // Cập nhật thanh mana khi reset máu về giá trị tối đa
+    }
 }
