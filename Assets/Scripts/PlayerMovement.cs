@@ -1,40 +1,48 @@
+﻿using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     // Movement
     public float moveSpeed;
-    public bool canJump;
-   
+    private string currentState;
+
     [HideInInspector]
     public Vector2 moveDir;
     [HideInInspector]
     public float lastHorizontalVector;
     [HideInInspector]
     public float lastVerticalVector;
-     public float jumpForce;
+    public float jumpForce;
 
     // References
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
     public Animator animator;
-    private DiamondScore diamondScore;
+    public bool canJump;
+    PlayerInteraction playerInteraction;
     
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        diamondScore = GameObject.Find("DiamondScore").GetComponent<DiamondScore>();
+        playerInteraction = GetComponent<PlayerInteraction>();
     }
 
     void Update()
     {
+        if (DialogueController.isActive == true)
+        {
+            return;
+        }
         InputManagement();
         
             if(Input.GetKeyDown(KeyCode.Space))
             {
                 Jump();
             }
-            if(Input.GetKeyDown(KeyCode.O))
+        if(Input.GetKeyDown(KeyCode.O))
             {
                 Roll();
             }
@@ -44,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         Move();
-        
     }
 
     void InputManagement()
@@ -70,32 +77,26 @@ public class PlayerMovement : MonoBehaviour
     }
       
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-{
-    Debug.Log("Collision detected with: " + collision.gameObject.name); // Thêm dòng này để kiểm tra xem collision có xảy ra không
-
-    if(collision.gameObject.tag == "Ground")
-    {
-        canJump = true;
-    }
-    else if(collision.gameObject.tag == "Diamond")
-    {
-        diamondScore.AddCoins(100); // Thêm điểm khi va chạm với diamond
-        Destroy(collision.gameObject); // Xóa diamond khỏi scene
-    }
-}
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "Ground")
-        {
-            canJump=false;
-        }
-    }
 
     void Move()
     {
-        rb.velocity = new Vector2(moveDir.x * moveSpeed, rb.velocity.y);
+        // Movement chỉ enable sau khi hết hiệu ứng sau khi bị knockback
+        if (playerInteraction.KnockbackCounter <= 0)
+        {
+            rb.velocity = new Vector2(moveDir.x * moveSpeed, rb.velocity.y);
+        }
+        else
+        {
+            if (playerInteraction.KnockedFromRight)
+            {
+                rb.velocity = new Vector2(-playerInteraction.KnockbackForceX, playerInteraction.KnockbackForceY);
+            }
+            else
+            {
+                rb.velocity = new Vector2(playerInteraction.KnockbackForceX, playerInteraction.KnockbackForceY);
+            }
+            playerInteraction.KnockbackCounter -= Time.deltaTime;
+        }
     }
     void Roll()
     {
@@ -104,16 +105,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-       
-        
-         animator.SetTrigger("Jump");
+        animator.SetTrigger("Jump");
     }
-     
-   
-
-   
-
-    
-
-   
+    public void ChangeAnimationState(string newState)
+    {
+        if (currentState == newState) return;
+        animator.Play(newState);
+        currentState = newState;
+    }
 }

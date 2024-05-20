@@ -14,6 +14,6 @@ public class DiamondScore : MonoBehaviour {
 
 	public void AddCoins(int coins) {
 		this.coins += coins;
-		text.text = "*" + this.coins.ToString().PadLeft(2, '0');
+		text.text = "x " + this.coins.ToString().PadLeft(2, '0');
 	}
 }
