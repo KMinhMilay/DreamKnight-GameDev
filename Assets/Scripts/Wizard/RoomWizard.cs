@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RoomWizard : MonoBehaviour
 {
-    private Wizard wizard;
+    public Wizard wizard;
 
     private void Awake()
     {
@@ -26,6 +26,16 @@ public class RoomWizard : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             wizard.SetTargetPlayer(null);
+        }
+    }
+    private void Update()
+    {
+        if (wizard != null)
+        {
+            if (wizard.state == BossState.Dead)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

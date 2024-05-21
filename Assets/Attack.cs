@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    float AttackDamage = 30f;
+    float AttackDamage = 15f;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerInteraction playerInteraction = collision.GetComponent<PlayerInteraction>();

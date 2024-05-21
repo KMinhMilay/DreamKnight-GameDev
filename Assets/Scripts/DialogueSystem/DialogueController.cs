@@ -27,6 +27,9 @@ public class DialogueController : MonoBehaviour
         isActive = true;
         dialogueImg.enabled = isActive;
         Debug.Log("Đã mở dialogue! Bắt đàu hội thoại. Load messages: " + messages.Length);
+        Time.timeScale = 0f; // Tạm dừng thời gian trong trò chơi
+        
+
         DisplayMessage();
         
     }
@@ -60,6 +63,8 @@ public class DialogueController : MonoBehaviour
             actorName.text = "";
             messageText.text = "";
             dialogueImg.enabled = isActive;
+            Time.timeScale = 1f; // Tạm dừng thời gian trong trò chơi
+
         }
     }
     // Start is called before the first frame update

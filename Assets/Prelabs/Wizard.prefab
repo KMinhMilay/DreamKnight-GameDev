@@ -145,7 +145,10 @@ MonoBehaviour:
   barriel: {fileID: 686449170315940894}
   timeSkill: 5
   ghost: {fileID: 3078997573554771616}
+  totalHP: 100
   state: 0
+  stunMaxDuration: 1
+  stunRemainingDuration: 5
 --- !u!70 &7122293032993232147
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -286,9 +289,9 @@ GameObject:
   - component: {fileID: 3078997573554771616}
   - component: {fileID: 951166965292107582}
   - component: {fileID: 4380702631288066170}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ghost
-  m_TagString: Untagged
+  m_TagString: BossSkillAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -458,9 +461,9 @@ GameObject:
   - component: {fileID: 4529276201129086857}
   - component: {fileID: 761151865218470067}
   - component: {fileID: 6125045961310029751}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NormalBullet
-  m_TagString: Untagged
+  m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

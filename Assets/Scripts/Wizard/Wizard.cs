@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -10,7 +10,9 @@ public enum BossState
 {
    Idle,
    Run,
-   Attack
+   Attack,
+   Hit,
+   Dead
 }
 public class Wizard : MonoBehaviour
 {
@@ -23,17 +25,18 @@ public class Wizard : MonoBehaviour
    
    [Header("Normal Atk")] 
    [SerializeField] private float timeAtk = 3;
-   [SerializeField] private float dmgAtk = 5;
+   [SerializeField] private float dmgAtk = 15;
    [SerializeField] private WizardBullet normalBullet;
    [SerializeField] private Transform barriel;
    
    [Header("Skill")] 
    [SerializeField] private float timeSkill;
    [SerializeField] private Ghost ghost;
-   
-   
-   //Target
-   private PlayerMovement player;
+    
+   [SerializeField] public float remainingHP = 20;
+    [SerializeField] private float stunDuration;
+    //Target
+    private PlayerMovement player;
 
    //cached 
    //for random move
@@ -75,6 +78,10 @@ public class Wizard : MonoBehaviour
    {
       //Neu player khong o trong room => player = null
       //random move
+      if (remainingHP <= 0)
+        {
+            Die();
+        }
       if (player == null)
       {
          GetRandomDirMove();
@@ -99,15 +106,34 @@ public class Wizard : MonoBehaviour
          NormalAtk();
          return;
       }
+      if (state == BossState.Attack && isAlive())
+        {
+            StartCoroutine("forceEndAttackState");
+        }
       
       
-      if (state != BossState.Attack)
+      if (state != BossState.Attack && state != BossState.Hit && isAlive())
       {
          //Neu khong tan cong duoc => chase player
          ChasePlayer();
       }
+      if (state == BossState.Hit && isAlive())
+        {
+            if (stunDuration > 0)
+            {
+                stunDuration -= Time.deltaTime;
+            }
+            else
+            {
+                state = BossState.Idle;
+                animator.SetBool("isStunned", false);
+            }
+        }
    }
-   
+   private bool isAlive()
+    {
+        return remainingHP > 0;
+    }
 
    private void ChasePlayer()
    {
@@ -168,12 +194,12 @@ public class Wizard : MonoBehaviour
    }
    private bool CanNormalAtk()
    {
-      return coolDownNormalAtk <= 0 && state != BossState.Attack;
+      return coolDownNormalAtk <= 0 && state != BossState.Attack && state != BossState.Hit && isAlive();
    }
    
    private bool CanUseSkill()
    {
-      return coolDownSkill <= 0 && state != BossState.Attack;
+      return coolDownSkill <= 0 && state != BossState.Attack && state != BossState.Hit && isAlive();
    }
    private void GetDirToChasePlayer()
    {
@@ -241,4 +267,64 @@ public class Wizard : MonoBehaviour
    {
       player = target;
    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "PlayerAttack")
+        {
+            print("Boss nhận sát thương từ đánh thường của player");
+            ReceiveDMG(5);
+            stunDuration = 1;
+            if (isAlive())
+            {
+                state = BossState.Hit;
+                animator.SetBool("isStunned", true);
+                animator.SetTrigger(AnimationID.HitAnim);
+            }
+            else
+            {
+                Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+                Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerHitbox"), LayerMask.NameToLayer("Enemy"), true);
+            }
+            
+            
+        }
+        if (collision.gameObject.tag == "PlayerSkillAttack")
+        {
+            print("Boss nhận sát thương từ skill của player");
+            ReceiveDMG(10);
+            stunDuration = 1;
+            if (isAlive())
+            {
+                state = BossState.Hit;
+                animator.SetBool("isStunned", true);
+                animator.SetTrigger(AnimationID.HitAnim);
+            }
+            else
+            {
+                Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+                Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerHitbox"), LayerMask.NameToLayer("Enemy"), true);
+            }
+        }
+    }
+
+    private void ReceiveDMG(float dmg)
+    {
+        remainingHP -= dmg;
+    }
+    public void Die()
+    {
+        StartCoroutine("PlayingDeathAnimation");
+    }
+    IEnumerator forceEndAttackState()
+    {
+        yield return new WaitForSeconds(0.6f);
+        state = BossState.Idle;
+    }
+    IEnumerator PlayingDeathAnimation()
+    {
+        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerSkillAttack"), LayerMask.NameToLayer("Enemy"), true);
+        animator.SetTrigger(AnimationID.DieAnim);
+        yield return new WaitForSeconds(2f);
+        state = BossState.Dead;
+    }
 }

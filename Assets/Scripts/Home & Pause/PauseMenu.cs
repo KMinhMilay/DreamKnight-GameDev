@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    [ SerializeField ] GameObject pauseMenu;
+    [ SerializeField ] GameObject Pause_panel;
     public void Pause()
     {
-        pauseMenu.SetActive(true);
+        Pause_panel.SetActive(true);
     }
     public void Home()
     {
@@ -17,7 +17,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        pauseMenu.SetActive(false);
+        Pause_panel.SetActive(false);
     }
     public void Restart()
     {

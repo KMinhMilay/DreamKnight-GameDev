@@ -38,5 +38,13 @@ public class Enemy_Interaction : MonoBehaviour
         {
             mushroom.TakeDamage(dmg);
         }
+        if (script is FlyingEyeMovement flyingEye)
+        {
+            flyingEye.TakeDamage(dmg);
+        }
+        if (script is SkeletonMovement skeleton)
+        {
+            skeleton.TakeDamage(dmg);
+        }
     }
 }

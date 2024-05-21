@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5313997024874918178}
   - component: {fileID: 6716051146311912029}
   - component: {fileID: 299936681536837780}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SwordSlash
   m_TagString: PlayerSkillAttack
   m_Icon: {fileID: 0}

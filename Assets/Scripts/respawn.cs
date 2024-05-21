@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class respawn : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class respawn : MonoBehaviour
     [SerializeField] ManaBar manaBar;
     Animator animator;
     bool isDead = false; // Biến để kiểm tra xem nhân vật đã chết chưa
-    
+
     private void Start()
     {
         startPos = transform.position;
@@ -64,13 +65,15 @@ public class respawn : MonoBehaviour
         {
             manaBar.ResetMana(); // Reset mana
         }
+        // Load lại màn chơi hiện tại
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void RespawnOnZeroHealth()
     {
-        if (!isDead) 
+        if (!isDead)
         {
-            Die();       
+            Die();
         }
     }
 }

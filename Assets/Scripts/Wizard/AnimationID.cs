@@ -10,4 +10,5 @@ public static class AnimationID
     public static int NormalAtkAnim = Animator.StringToHash("attack1");
     public static int SkillAnim = Animator.StringToHash("attack2");
     public static int DieAnim = Animator.StringToHash("die");
+    public static int HitAnim = Animator.StringToHash("isHit");
 }

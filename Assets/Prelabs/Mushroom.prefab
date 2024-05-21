@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 529658444480627427}
   - component: {fileID: 8794783193395367427}
   - component: {fileID: 3083590295404125847}
+  - component: {fileID: 2595756182030503394}
   m_Layer: 7
   m_Name: Mushroom
   m_TagString: Enemy
@@ -300,3 +301,16 @@ MonoBehaviour:
   runTime: 3
   animator: {fileID: 5813647059299591785}
   spriteRenderer: {fileID: 6967305752342479213}
+--- !u!114 &2595756182030503394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5875153416320756522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47561c7d47676694481fab4c01fbb4b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  script: {fileID: 3083590295404125847}

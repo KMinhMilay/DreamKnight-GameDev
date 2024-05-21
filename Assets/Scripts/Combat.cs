@@ -39,18 +39,18 @@ public class Combat : MonoBehaviour
             {
                 Skill();
             }
-            if(
-            Input.GetKeyDown(KeyCode.E))
-            {
-                Pray();
-            }
+
              if (Input.GetKeyDown(KeyCode.J))
         {
             groundAttack();
         }
         void Attack()
         {
-            animator.SetTrigger("Attack");
+            if (!skillOnCooldown)
+            {
+                animator.SetTrigger("Attack");
+            }
+            
         }
         void Skill()
         {
@@ -62,19 +62,9 @@ public class Combat : MonoBehaviour
             }
             
         }
-        void Pray()
-        {
-            skillCost = 30;
-            if (healthbar.getCurrentHealth() < healthbar.getMaxHealth() && manabar.getCurrentMana() > skillCost && !skillOnCooldown)
-            {
-                animator.SetTrigger("Pray");
-                manabar.GetMana(skillCost);
-            }
-        }
         void groundAttack()
        
         {
-            
             animator.SetTrigger("groundAttack");
         }
     }
@@ -88,9 +78,5 @@ public class Combat : MonoBehaviour
             originalScale.y,
             originalScale.z
             );
-    }
-    public void heal()
-    {
-        healthbar.Heal(50);
     }
 }

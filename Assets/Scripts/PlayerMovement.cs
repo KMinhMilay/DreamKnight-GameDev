@@ -32,6 +32,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (ChucNangMenu.IsGamePaused)
+        {
+            return;
+        }
         if (DialogueController.isActive == true)
         {
             return;
@@ -51,11 +55,27 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (ChucNangMenu.IsGamePaused)
+        {
+            return;
+        }
+        if (DialogueController.isActive == true)
+        {
+            return;
+        }
         Move();
     }
 
     void InputManagement()
     {
+        if (ChucNangMenu.IsGamePaused)
+        {
+            return;
+        }
+        if (DialogueController.isActive == true)
+        {
+            return;
+        }
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
 

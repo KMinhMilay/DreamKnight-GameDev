@@ -60,7 +60,7 @@ public class PlayerInteraction : MonoBehaviour
 
             touchSpikesEvent();
         }
-        if (collision.gameObject.tag == "EnemyAttack")
+        if (collision.gameObject.tag == "EnemyAttack" || collision.gameObject.tag == "BossSkillAttack")
         {
             KnockbackCounter = KnockbackTotalTime;
             KnockedFromRight = collision.transform.position.x >= transform.position.x;
@@ -71,6 +71,11 @@ public class PlayerInteraction : MonoBehaviour
         {
             diamondScore.AddCoins(100); // Thêm điểm khi va chạm với diamond
             Destroy(collision.gameObject); // Xóa diamond khỏi scene
+        }
+        if (collision.gameObject.tag == "HpPotion")
+        {
+            healthBar.Heal(25);
+            Destroy(collision.gameObject);
         }
     }
     public void takeDamageFromEnemyAttack(float dmg)
@@ -83,10 +88,6 @@ public class PlayerInteraction : MonoBehaviour
         playerMovement.rb.AddForce(Vector2.up * 2f, ForceMode2D.Impulse);
         animator.SetTrigger("Hurt");
         healthBar.Damage(10);
-    }
-    private void touchEnemyEvent()
-    {
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)

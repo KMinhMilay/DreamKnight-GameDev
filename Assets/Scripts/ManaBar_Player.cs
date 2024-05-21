@@ -40,7 +40,7 @@ public class ManaBar : MonoBehaviour
         if(mana < maxMana)
         {
             mana += 0.01f;
-            print("Đang hồi phục mana");
+            //print("Đang hồi phục mana");
         }
         
     }
