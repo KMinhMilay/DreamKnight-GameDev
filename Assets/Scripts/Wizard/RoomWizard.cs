@@ -34,8 +34,9 @@ public class RoomWizard : MonoBehaviour
         {
             if (wizard.state == BossState.Dead)
             {
-                Scene.instance.NextLevel();
+                
                 Destroy(gameObject);
+                Scene.instance.NextLevel();
                 
             }
         }
