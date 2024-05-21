@@ -44,7 +44,7 @@ public class respawn : MonoBehaviour
         // Kích hoạt trigger death trong animator
         animator.SetTrigger("Death");
         // Thêm code xử lý khi nhân vật chết tại đây nếu cần
-        StartCoroutine(RespawnAfterDelay(1.0f)); // Chờ 1 giây trước khi respawn
+        StartCoroutine(RespawnAfterDelay(0.5f)); // Chờ 1 giây trước khi respawn
     }
 
     IEnumerator RespawnAfterDelay(float duration)
